@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Steps Tracker</title>
+</head>
+<body>
+
+    <style>
+
+    <!-- Progress with steps -->
+    ol.progtrckr {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    ol.progtrckr li {
+        font-size: 1.7rem;
+        font-weight: bold;
+        counter-increment: steps;
+        display: inline-block;
+        text-align: center;
+        line-height: 3em;
+    }
+
+    ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+    ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+    ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+    ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+    ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+    ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+    ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+    ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+    ol.progtrckr li.progtrckr-done,
+    ol.progtrckr li.progtrckr-doing {
+        color: #810026;
+        border-bottom: 4px solid #f90;
+    }
+    ol.progtrckr li.progtrckr-todo {
+        color: #ddd; 
+        border-bottom: 4px solid #ddd;
+    }
+
+    ol.progtrckr li:after {
+        content: "\00a0\00a0";
+    }
+    ol.progtrckr li:before {
+        position: relative;
+        bottom: -1.9em;
+        float: left;
+        left: 50%;
+        line-height: 1em;
+    }
+    ol.progtrckr li.progtrckr-done:before {
+        content: "\2713";
+        color: white;
+        background-color: #f90;
+        height: 41px;
+        width: 41px;
+        line-height: 1.4em;
+        border: none;
+        border-radius: 50%;
+        font-size: 2.2rem;
+    }
+
+    ol.progtrckr li.progtrckr-doing:before {
+        content: counters(steps,"") " ";
+        color: #f90;
+        background-color: white;
+        font-size: 1.5em;
+        bottom: -1.6em;
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+        border: 2px solid #f90;
+        line-height: 47px;
+        border-radius: 50%;
+    }
+   
+
+    ol.progtrckr li.progtrckr-todo:before {
+        content: counters(steps,"") " ";
+        color: #ddd;
+        background-color: white;
+        font-size: 1.5em;
+        bottom: -1.6em;
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+        border: 2px solid;
+        line-height: 47px;
+        border-radius: 50%;
+    }
+
+</style>
+
+    <h1 id="greeting">Steps Tracker</h1>
+    
+    <div class="container"></div>
+
+    <!-- configure Dojo -->
+    <script>
+        var dojoConfig = {
+            async: true,
+            packages: [{    
+                name: "widget",
+                location: location.pathname.replace(/\/[^/]*$/, '') + '/widget'
+            }]
+        };
+    </script>
+    <!-- load Dojo -->
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+ 
+    <script>
+        require([
+            'widget/StepsTracker'
+        ], function (StepsTracker) {
+
+        
+        
+            var stepsTracker = new StepsTracker({
+              "steps":  ["Order Processing", "Pre-Production", "In Production", "Shipped"],
+              "currentStep": 0
+            });
+
+            stepsTracker.placeAt(document.querySelector(".container"));
+            
+            setTimeout(function(){
+                stepsTracker.setCurrentStep(1);
+            }, 2000);
+
+            setTimeout(function(){
+                stepsTracker.setCurrentStep(5);
+            }, 4000);
+    
+        });
+    </script>
+</body>
+</html>
