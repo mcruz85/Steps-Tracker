@@ -10,7 +10,6 @@ define([
 
 		constructor: function(config) {
 
-			console.log("constructor", config);
 			this.config = config || {};
 			this.config.steps = this.config.steps || [];
 			this.config.currentStep = this.config.currentStep || 0;
