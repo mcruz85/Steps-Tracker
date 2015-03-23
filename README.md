@@ -1,3 +1,3 @@
 # Steps-Tracker
 
-A dojo widget to create a step tracker.
+A simple UI widget to tell users in what step of a process they are.

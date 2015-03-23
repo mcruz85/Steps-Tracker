@@ -58,7 +58,7 @@ define([
 		if (stepNumber < currentStep) {
 			return "progtrckr-done";
 		} else if (stepNumber === currentStep) {
-			return "progtrckr-doing";
+			return "progtrckr-done";
 		} else {
 			return "progtrckr-todo";
 		}
